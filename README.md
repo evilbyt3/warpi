@@ -1,6 +1,7 @@
 # WarPi
 
-These files are Researching how wardriving can be done, how easy it is & what could be the impact
+Transform your RaspberryPi into a wardriving rig
+Researching how wardriving can be done, how easy it is & what could be the impact
 
 ## Hardware
 - [Raspberry Pi 3 Model B]() : 
@@ -12,5 +13,8 @@ These files are Researching how wardriving can be done, how easy it is & what co
 - jumper cables & other stuff
 
 ## Software
+- OS - [Manjaro ARM Minimal](https://manjaro.org/static/img/minimal.webp?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
+- [Kismet](https://www.kismetwireless.net/)
 
 ## Analysis
+- see `stats.ipynb`
