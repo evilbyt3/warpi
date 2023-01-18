@@ -1,6 +1,7 @@
 # WarPi
 
 Transform your RaspberryPi into a wardriving rig
+
 Researching how wardriving can be done, how easy it is & what could be the impact
 
 ## Hardware
