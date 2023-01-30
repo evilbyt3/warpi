@@ -18,4 +18,5 @@ Researching how wardriving can be done, how easy it is & what could be the impac
 - [Kismet](https://www.kismetwireless.net/)
 
 ## Analysis
-- see `stats.ipynb`
+- see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
+
