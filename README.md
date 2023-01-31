@@ -114,7 +114,7 @@ sudo systemctl enable gpsd && sudo systemctl start gpsd
 #  - GUI: xgps
 ```
 
-![](https://imgur.com/a/1xT3n5F)
+![](https://i.imgur.com/zUsKprY.png)
 
 ## Analysis
 - see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
