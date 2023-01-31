@@ -46,6 +46,74 @@ network={
 }
 ```
 
+### Interfacing w The GPS Module
+The GPS module chosen has 4 pins:
+- VCC *(Supply Voltage)* & GND *(Ground)* - for power
+- Tx *(Transmitter)* & Rx *(Receiver)* - for data comms
+
+The module provides [NMEA](http://aprs.gids.nl/nmea/) data strings to the TX pin resulting in GPS information *(i.e longitude, latitude)*. More info can be found [here](https://robu.in/wp-content/uploads/2017/09/NEO-M8-FW3_ProductSummary_UBX-16000345.pdf)
+
+![](https://content.instructables.com/FUO/3N6L/KA6SGHDQ/FUO3N6LKA6SGHDQ.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=9123c8b5ac3825277b2bf7dbfe1a9287)
+
+Once the module is connected & the Pi is powered on some changes need to be:
+- enable [UART](https://electronicshacks.com/raspberry-pi-serial-uart-tutorial/) in [config.txt](https://elinux.org/RPiconfig)
+```bash
+# contains conf params read on boot-up from SD card
+sudo vim /boot/config.txt   
+
+# enable options
+dtparam=spi=on
+dtoverlay=pi3-disable-bt  
+core_freq=250
+enable_uart=1
+force_turbo=1
+```
+- replace content in [cmdline.txt](https://elinux.org/RPi_cmdline.txt) with *(recommended to make a copy of the original: `sudo cp /boot/cmdline.txt /boot/cmdline.txt.bak`)*
+```bash
+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait quiet splash plymouth.ignore-serial-consoles
+```
+- reboot: `sudo reboot`
+
+Upon reboot check if your serial port is enabled: `ls /dev/ttyS0` *(more on [/dev/tty](https://www.mit.edu/afs.new/athena/system/rhlinux/redhat-6.2-docs/HOWTOS/other-formats/html/Text-Terminal-HOWTO-html/Text-Terminal-HOWTO-6.html) meaning)*
+
+```bash
+[warpi@warpi ~]$ sudo cat /dev/ttyS0
+$GPRMC,,V,,,,,,,,,,N*53
+$GPVTG,,,,,,,,,N*30
+$GPGGA,,,,,,0,00,99.99,,,,,,*48
+$GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99*30
+$GPGSV,1,1,00*79
+$GPGLL,,,,,,V,N*64
+$GPRMC,,V,,,,,,,,,,N*53
+$GPVTG,,,,,,,,,N*30
+$GPGGA,,,,,,0,00,99.99,,,,,,*48
+$GPGSA,A,1,,,,,,,,,,,,,99.99,99.99,99.99*30
+$GPGSV,1,1,00*79
+$GPGLL,,,,,,V,N*64
+```
+
+> **Note**: with this GPS module I noticed that it [takes a while to start working once you're outside](https://stackoverflow.com/questions/48663880/gps-nmea-output-getting-valid-gpgsv-but-not-valid-gpgga-gprmc). So don't panic if you're inside & you don't get ant latitude or longitude
+
+Now you can read & interpret the NMEA data with porogramming languages *(python:  [minicon](https://help.ubuntu.com/community/Minicom) [pynmea2](https://openbase.com/python/pynmea2))* OR with something like  [gpsd](https://gpsd.io/) - a gps service daemon
+
+```bash
+sudo apt install gpsd
+
+# link serial port with gpsd
+sudo nvim /etc/default/gpsd
+START_DAEMON="true"
+GPSD_OPTIONS="/dev/ttyS0"
+DEVICES=""
+USBAUTO="true"
+
+# enable service
+sudo systemctl enable gpsd && sudo systemctl start gpsd
+
+# Now can see data with
+#  - CLI: cgps, gpsmon
+#  - GUI: xgps
+```
+
 ## Analysis
 - see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
 
