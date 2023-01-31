@@ -116,7 +116,7 @@ sudo systemctl enable gpsd && sudo systemctl start gpsd
 
 ![](https://i.imgur.com/zUsKprY.png)
 
-#### Installing Alfa Network AWS1900 Driver
+### Installing Alfa Network AWS1900 Driver
 
 ```bash
 # Install linux kernel headers & reboot
@@ -150,6 +150,43 @@ sudo systemctl enable NetworkManager && sudo systemctl start NetworkManager
 ```
 
 > **Note**: had some problems with installing the drivers depending on your OS you might encouter them as well: if lost follow the [docs](https://github.com/aircrack-ng/rtl8812au#for-raspberry-rpi) & this [savior forum thread](https://dietpi.com/forum/t/rpi-install-edimax-ew-7811uac-rtl8812au-driver/1116/29)
+
+### Setting up [Kismet](https://www.kismetwireless.net/)
+
+
+Installing it per the [documentation](https://www.kismetwireless.net/docs/readme/installing/linux/):
+```bash
+
+sudo apt install build-essential git libwebsockets-dev pkg-config zlib1g-dev libnl-3-dev libnl-genl-3-dev libcap-dev libpcap-dev libnm-dev libdw-dev libsqlite3-dev libprotobuf-dev libprotobuf-c-dev protobuf-compiler protobuf-c-compiler libsensors4-dev libusb-1.0-0-dev python3 python3-setuptools python3-protobuf python3-requests python3-numpy python3-serial python3-usb python3-dev python3-websockets librtlsdr0 libubertooth-dev libbtbb-dev
+
+# https://www.kismetwireless.net/packages/#debian-bullseye
+wget -O - https://www.kismetwireless.net/repos/kismet-release.gpg.key | sudo apt-key add -
+echo 'deb https://www.kismetwireless.net/repos/apt/release/bullseye bullseye main' | sudo tee /etc/apt/sources.list.d/kismet.list
+sudo apt update
+sudo apt install kismet
+```
+
+Enable GPS in `/etc/kismet/kismet.conf`:
+```bash
+# gps=serial:device=/dev/ttyACM0,name=laptop
+# gps=tcp:host=1.2.3.4,port=4352
+ gps=gpsd:host=localhost,port=2947
+# gps=virtual:lat=123.45,lon=45.678,alt=1234
+# gps=web:name=gpsweb
+```
+And add the [wigle format]() along with [pcapng]() in `/etc/kistmet/kismet_logging.conf` for further analysis:
+```bash
+log_types=kismet,wiglecsv,pcapng
+# also increase these if u don't have enough resources (i.e memory)
+# By default, data source records are generated once per minute
+kis_log_datasources_rate=30
+# By default, channel history is logged every 20 seconds
+kis_log_channel_history_rate=20
+```
+
+Then you can start your wardriving sessions with: `sudo kismet -t <title>` & enter the dashboard from a browser @ `http://<PI_LOCAL_IP>:2501/`
+
+![](https://i.imgur.com/jYy31pA.png)
 
 
 ## Analysis
