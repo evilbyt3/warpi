@@ -14,9 +14,37 @@ Researching how wardriving can be done, how easy it is & what could be the impac
 - [Powerbank](): will power your Pi, I had one laying around of 7500 mAh => pi alive-time of around 4h. The best solution would be a powerbank of 30000 mAh => 48h alive-time *(if confused see [this article](https://www.powerbankexpert.com/best-raspberry-pi-power-bank/))*
 - [SmartPhone](): since I couldn't connect the LCD screen to interact with the pi, I used my phone as the command & control through SSH & for providing hotspot
 
-## Software
-- OS - [Manjaro ARM Minimal](https://manjaro.org/static/img/minimal.webp?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)
-- [Kismet](https://www.kismetwireless.net/)
+## Putting Everything Together
+
+### OS Installation & Setup
+
+For this build I choose the [Manjaro ARM Minimal](https://github.com/manjaro-arm/generic-images/releases/download/22.12/Manjaro-ARM-minimal-generic-22.12.img.xz) since I'm quite comfortable with Arch Linux & it's lightweight so it doesn't exhaust much resources. So just flash the image onto the SD card
+- Linux: `sudo dd if=/path/to/manjaro.img of=/dev/sdX status="progress"`
+- Windows: use [Rufus](https://rufus.ie/en/)
+- Cross-Platform: [RPI-Imager](https://www.raspberrypi.com/software/)
+
+Then just follow the instructions from the installation & once logged in setup the following:
+- update & upgrade: `sudo pacman -Syu`
+- install [yay](https://github.com/Jguer/yay) AUR helper
+```bash
+# Build manually from source
+cd /opt && sudo git clone https://aur.archlinux.org/yay.git
+sudo chown -R $USER:<USER_GROUP> ./yay  # unsure of GROUP, exec `id`
+cd yay && makepkg -si 
+
+# OR easier
+sudo pacman -S yay
+```
+- install required tools: `yay -S `
+- configure WiFi to connect to the phone's hotspot , place a file [wpa_supplicant.conf](https://www.raspberrypi.com/documentation/computers/configuration.html#adding-the-network-details-to-your-raspberry-pi) in `x:\boot` partition:
+```bash
+country=US # Your 2-digit country code ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev 
+network={ 
+	ssid="YOUR_NETWORK_NAME" 
+	psk="YOUR_PASSWORD" 
+	key_mgmt=WPA-PSK 
+}
+```
 
 ## Analysis
 - see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
