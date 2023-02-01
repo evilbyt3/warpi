@@ -18,24 +18,13 @@ Researching how wardriving can be done, how easy it is & what could be the impac
 
 ### OS Installation & Setup
 
-For this build I choose the [Manjaro ARM Minimal](https://github.com/manjaro-arm/generic-images/releases/download/22.12/Manjaro-ARM-minimal-generic-22.12.img.xz) since I'm quite comfortable with Arch Linux & it's lightweight so it doesn't exhaust much resources. So just flash the image onto the SD card
+For this build I choose the [Raspberry Pi OS Lite](https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-09-26/2022-09-22-raspios-bullseye-arm64-lite.img.xz): : a lightweight OS without GUI and is recommended to be used since it is stable and developed specifically for the Pi. So just flash the image onto the SD card
 - Linux: `sudo dd if=/path/to/manjaro.img of=/dev/sdX status="progress"`
 - Windows: use [Rufus](https://rufus.ie/en/)
 - Cross-Platform: [RPI-Imager](https://www.raspberrypi.com/software/)
 
 Then just follow the instructions from the installation & once logged in setup the following:
-- update & upgrade: `sudo pacman -Syu`
-- install [yay](https://github.com/Jguer/yay) AUR helper
-```bash
-# Build manually from source
-cd /opt && sudo git clone https://aur.archlinux.org/yay.git
-sudo chown -R $USER:<USER_GROUP> ./yay  # unsure of GROUP, exec `id`
-cd yay && makepkg -si 
-
-# OR easier
-sudo pacman -S yay
-```
-- install required tools: `yay -S `
+- update & upgrade: `sudo apt update && sudo apt upgrade`
 - configure WiFi to connect to the phone's hotspot , place a file [wpa_supplicant.conf](https://www.raspberrypi.com/documentation/computers/configuration.html#adding-the-network-details-to-your-raspberry-pi) in `x:\boot` partition:
 ```bash
 country=US # Your 2-digit country code ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev 
