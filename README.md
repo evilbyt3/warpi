@@ -40,11 +40,11 @@ The GPS module chosen has 4 pins:
 - VCC *(Supply Voltage)* & GND *(Ground)* - for power
 - Tx *(Transmitter)* & Rx *(Receiver)* - for data comms
 
-The module provides [NMEA](http://aprs.gids.nl/nmea/) data strings to the TX pin resulting in GPS information *(i.e longitude, latitude)*. More info can be found [here](https://robu.in/wp-content/uploads/2017/09/NEO-M8-FW3_ProductSummary_UBX-16000345.pdf)
+The module provides [NMEA](http://aprs.gids.nl/nmea/) data strings to the TX pin, that once parsed will yield GPS information *(i.e longitude, latitude)*. More info can be found [here](https://robu.in/wp-content/uploads/2017/09/NEO-M8-FW3_ProductSummary_UBX-16000345.pdf)
 
 ![](https://content.instructables.com/FUO/3N6L/KA6SGHDQ/FUO3N6LKA6SGHDQ.jpg?auto=webp&frame=1&width=1024&fit=bounds&md=9123c8b5ac3825277b2bf7dbfe1a9287)
 
-Once the module is connected & the Pi is powered on some changes need to be:
+Once the module is connected & the Pi is powered on, some changes need to be:
 - enable [UART](https://electronicshacks.com/raspberry-pi-serial-uart-tutorial/) in [config.txt](https://elinux.org/RPiconfig)
 ```bash
 # contains conf params read on boot-up from SD card
@@ -81,9 +81,9 @@ $GPGSV,1,1,00*79
 $GPGLL,,,,,,V,N*64
 ```
 
-> **Note**: with this GPS module I noticed that it [takes a while to start working once you're outside](https://stackoverflow.com/questions/48663880/gps-nmea-output-getting-valid-gpgsv-but-not-valid-gpgga-gprmc). So don't panic if you're inside & you don't get ant latitude or longitude
+> **Note**: with this GPS module I noticed that it [takes a while to start working once you're outside](https://stackoverflow.com/questions/48663880/gps-nmea-output-getting-valid-gpgsv-but-not-valid-gpgga-gprmc). So don't panic if you're inside & you don't get any latitude or longitude
 
-Now you can read & interpret the NMEA data with porogramming languages *(python:  [minicon](https://help.ubuntu.com/community/Minicom) [pynmea2](https://openbase.com/python/pynmea2))* OR with something like  [gpsd](https://gpsd.io/) - a gps service daemon
+Now you can read & interpret the NMEA data with programming languages *(python:  [minicon](https://help.ubuntu.com/community/Minicom) [pynmea2](https://openbase.com/python/pynmea2))* OR with something like  [gpsd](https://gpsd.io/) - a gps service daemon
 
 ```bash
 sudo apt install gpsd
@@ -138,7 +138,7 @@ warpi@warpi:~ $ ip a
 sudo systemctl enable NetworkManager && sudo systemctl start NetworkManager
 ```
 
-> **Note**: had some problems with installing the drivers depending on your OS you might encouter them as well: if lost follow the [docs](https://github.com/aircrack-ng/rtl8812au#for-raspberry-rpi) & this [savior forum thread](https://dietpi.com/forum/t/rpi-install-edimax-ew-7811uac-rtl8812au-driver/1116/29)
+> **Note**: had some setbacks with installing the drivers depending on your OS you might encouter them as well: if lost follow the [docs](https://github.com/aircrack-ng/rtl8812au#for-raspberry-rpi) & this [savior forum thread](https://dietpi.com/forum/t/rpi-install-edimax-ew-7811uac-rtl8812au-driver/1116/29)
 
 ### Setting up [Kismet](https://www.kismetwireless.net/)
 
@@ -163,7 +163,7 @@ Enable GPS in `/etc/kismet/kismet.conf`:
 # gps=virtual:lat=123.45,lon=45.678,alt=1234
 # gps=web:name=gpsweb
 ```
-And add the [wigle format]() along with [pcapng]() in `/etc/kistmet/kismet_logging.conf` for further analysis:
+And add the [wigle format](https://wigle.net/phpbb/viewtopic.php?t=2523) along with [pcapng](https://pcapng.com/) in `/etc/kistmet/kismet_logging.conf` for further analysis:
 ```bash
 log_types=kismet,wiglecsv,pcapng
 # also increase these if u don't have enough resources (i.e memory)
