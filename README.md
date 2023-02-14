@@ -17,10 +17,8 @@ Researching how wardriving can be done, how easy it is & what could be the impac
 ## Putting Everything Together
 
 There's 2 options when it comes to setting up your Pi:
-1. manually: detailed [here](./docs/manual_install.md) *(OS install & setup, gps module, alpha drivers & kismet setup)*
-2. download the custom build image under releases and flash the image on an SD card: 
-  - Windows: with [Etcher](https://www.balena.io/etcher)
-  - Linux: `sudo dd bs=1M if=/path/to/warpi.img of/dev/sdX status="progres"`
+1. [manually install it](./docs/manual_install.md)
+2. download the custom build image under releases and flash the image on an SD card: `sudo dd bs=1M if=/path/to/warpi.img of/dev/sdX status="progres"`
 
 ## Analysis
 - see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
