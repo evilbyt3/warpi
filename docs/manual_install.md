@@ -1,3 +1,6 @@
+
+> **Note**: all the required files can be found in the [piset directory](../piset/)
+
 ## OS Installation & Setup
 
 For this build I choose the [Raspberry Pi OS Lite 64-bit](https://downloads.raspberrypi.org/raspios_lite_arm64/images/raspios_lite_arm64-2022-09-26/2022-09-22-raspios-bullseye-arm64-lite.img.xz): : a lightweight OS without GUI and is recommended to be used since it is stable and developed specifically for the Pi. So just flash the image onto the SD card
