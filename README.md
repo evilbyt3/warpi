@@ -18,7 +18,11 @@ Researching how wardriving can be done, how easy it is & what could be the impac
 
 Once you have all the hardware ready to go you can either:
 - go through the installation process [manualy](./docs/manual_install.md) *(recommended option to actully learn what you're building & how eveything works together)*
-- don't want to go through all of that hassle? I have just the right thing for you: a custom image with everything ready to go. Just download & flash it on an SD card: `sudo dd bs=1M if=/path/to/warpi.img of/dev/sdX status="progres"`
+- don't want to go through all of that hassle? I have just the right thing for you: a [custom image](https://github.com/vlagh3/warpi/releases) with everything ready to go. Just download & flash it on an SD card: `sudo dd bs=1M if=/path/to/warpi.img of/dev/sdX status="progres"`
+
+### Warpi Image
+
+> **NOTE**: want to create your own custom image OR improve the existing one? See [here how you could do that](./docs/custom_image.md) & make a [pull request](https://github.com/vlagh3/warpi/pulls)
 
 ## Analysis
 - see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
