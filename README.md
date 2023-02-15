@@ -26,7 +26,7 @@ Some changes need to be made first:
 - add your SSH public key in `.ssh/authorized_keys`
 - change the default password *(`warpi`)*: `pass`
 
-Now you can start your phone hotspot, power the warpi on & connect through SSH from your phone via something like [Termux](https://termux.dev/en/)
+Now you can start your phone hotspot, power the warpi on & connect through SSH from your phone via something like [Termux](https://termux.dev/en/) and execute the [run.sh](https://github.com/vlagh3/warpi/blob/main/src/run.sh) bash script to check if everything is setup correctly & start your wardriving session.
 
 > **NOTE**: want to create your own custom image OR improve the existing one? See [here how you could do that](./docs/custom_image.md) & make a [pull request](https://github.com/vlagh3/warpi/pulls)
 
