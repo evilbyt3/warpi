@@ -24,6 +24,7 @@ Once you have all the hardware ready to go you can either:
 Some changes need to be made first:
 - add the SSID and password for your hotspot in `/boot/wpa_supplicant-wlan0.conf` *(`wlan0` is the wifi interface, if yours is different exec `ip a` to find it)*
 - add your SSH public key in `.ssh/authorized_keys`
+- change the default password *(`warpi`)*: `pass`
 
 Now you can start your phone hotspot, power the warpi on & connect through SSH from your phone via something like [Termux](https://termux.dev/en/)
 
