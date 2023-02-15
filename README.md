@@ -1,5 +1,4 @@
 # WarPi
-
 Transform your RaspberryPi into a wardriving rig
 
 Researching how wardriving can be done, how easy it is & what could be the impact
@@ -14,16 +13,33 @@ Researching how wardriving can be done, how easy it is & what could be the impac
 - [Powerbank](): will power your Pi, I had one laying around of 7500 mAh => pi alive-time of around 4h. The best solution would be a powerbank of 30000 mAh => 48h alive-time *(if confused see [this article](https://www.powerbankexpert.com/best-raspberry-pi-power-bank/))*
 - [SmartPhone](): since I couldn't connect the LCD screen to interact with the pi, I used my phone as the command & control through SSH & for providing hotspot
 
-## Putting Everything Together
 
+## Putting Everything Together
 Once you have all the hardware ready to go you can either:
 - go through the installation process [manualy](./docs/manual_install.md) *(recommended option to actully learn what you're building & how eveything works together)*
 - don't want to go through all of that hassle? I have just the right thing for you: a [custom image](https://github.com/vlagh3/warpi/releases) with everything ready to go. Just download & flash it on an SD card: `sudo dd bs=1M if=/path/to/warpi.img of=/dev/sdX status="progres"`
 
+
 ### Warpi Image
+Some changes need to be made first:
+- add the SSID and password for your hotspot in `/boot/wpa_supplicant-wlan0.conf` *(`wlan0` is the wifi interface, if yours is different exec `ip a` to find it)*
+- add your SSH public key in `.ssh/authorized_keys`
+
+Now you can start your phone hotspot, power the warpi on & connect through SSH from your phone via something like [Termux](https://termux.dev/en/)
 
 > **NOTE**: want to create your own custom image OR improve the existing one? See [here how you could do that](./docs/custom_image.md) & make a [pull request](https://github.com/vlagh3/warpi/pulls)
 
+
 ## Analysis
-- see `stats.ipynb` *(or use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps)*
+The `stats.ipynb` notebook provides you with some sample code to easily analyze & visualize your collected data. It includes things such as:
+- find manufacturers from MAC addresses
+- most used SSIDs
+- open vs hidden networks
+- most used channels
+- detect wifi security protocols
+- mapping devices, heatmaps, path traversed
+- detect ISPs, device type *(e.g phone, car, IoT, printers, wearables)*
+- helper function to merge multiple data sources from different wardriving sessions
+
+> **Hint**: use [nbviewer](https://nbviewer.org/github/vlagh3/warpi/blob/main/stats.ipynb) to properly render maps
 
