@@ -4,6 +4,7 @@ Transform your Raspberry-Pi into a wardriving rig. This project came off during 
 | :exclamation:  This project is for testing, educational & research purposes only |
 |----------------------------------------------------------------------------------|
 
+![](./static/warpi_hardware.jpg)
 
 
 ## Hardware
@@ -34,6 +35,7 @@ Now you can start your phone hotspot, power the warpi on & connect through SSH f
 
 
 ## Analysis
+![](./static/viz.png)
 The `stats.ipynb` notebook provides you with some sample code to easily analyze & visualize the collected data. It includes things such as:
 - finding manufacturers from MAC addresses
 - seeing what are the most used SSIDs, channels
